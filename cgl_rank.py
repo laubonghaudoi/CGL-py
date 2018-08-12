@@ -11,7 +11,7 @@ class CGL_rank(object):
         Section 2, 
     '''
 
-    def __init__(self, data):
+    def __init__(self):
         '''
         The model has only 1 traninable parameter F, and non-trainable parameter X
         and data T. While $F = X*A*X^T$ (Eq.8) and $K = X * X^T$, the whole model consists
@@ -32,6 +32,17 @@ class CGL_rank(object):
             `K_inv`:
             `F`
         '''
+        self.T_train = None
+
+        self.C = None
+        self.F = None
+        self.F_ij = None
+        self.F_ik = None
+
+        self.Gradient = None
+        self.loss = np.inf
+
+    def load_data(self, data):
         self.opt = data.opt
 
         self.X = data.X
@@ -42,15 +53,6 @@ class CGL_rank(object):
         self.K_inv = np.linalg.inv(self.K)
 
         self.T = data.T
-        self.T_train = None
-
-        self.C = None
-        self.F = None
-        self.F_ij = None
-        self.F_ik = None
-
-        self.Gradient = None
-        self.loss = np.inf
 
     def train(self):
         '''

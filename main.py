@@ -18,5 +18,6 @@ if __name__ == '__main__':
         pass
     else:
     '''
-    model = CGL_rank(data_cmu)
+    model = CGL_rank()
+    model.load_data(data_cmu)
     model.train()
